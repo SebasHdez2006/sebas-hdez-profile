@@ -1,0 +1,12 @@
+const repo = process.env.GITHUB_REPOSITORY || "SebasHdez2006/sebas-hdez-profile";
+const branch = process.env.GITHUB_BRANCH || "main";
+const api = `https://api.github.com/repos/${repo}/contents`;
+const headers = (token: string) => ({ Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" });
+
+export type CustomCertificate = { id: string; title: string; issuer: string; discipline: string; file: string; type: "pdf" | "image"; year: string; repositoryPath: string };
+type Content = { sha: string; content: string };
+export async function readJson(token: string): Promise<{ items: CustomCertificate[]; sha?: string }> { const response = await fetch(`${api}/data/custom-certificates.json?ref=${branch}`, { headers: headers(token), cache: "no-store" }); if (response.status === 404) return { items: [] }; if (!response.ok) throw new Error("No se pudo leer el inventario del repositorio."); const content = await response.json() as Content; return { items: JSON.parse(Buffer.from(content.content, "base64").toString("utf8")), sha: content.sha }; }
+export async function putFile(token: string, path: string, bytes: Buffer, message: string, sha?: string) { const response = await fetch(`${api}/${encodeURIComponent(path).replaceAll("%2F", "/")}`, { method: "PUT", headers: { ...headers(token), "Content-Type": "application/json" }, body: JSON.stringify({ message, content: bytes.toString("base64"), branch, ...(sha ? { sha } : {}) }) }); if (!response.ok) throw new Error("GitHub no aceptó el cambio. Revisa los permisos de la aplicación OAuth."); return response.json(); }
+export async function removeFile(token: string, path: string, sha: string, message: string) { const response = await fetch(`${api}/${encodeURIComponent(path).replaceAll("%2F", "/")}`, { method: "DELETE", headers: { ...headers(token), "Content-Type": "application/json" }, body: JSON.stringify({ message, sha, branch }) }); if (!response.ok) throw new Error("No se pudo eliminar el archivo en GitHub."); }
+export async function fileSha(token: string, path: string) { const response = await fetch(`${api}/${encodeURIComponent(path).replaceAll("%2F", "/")}?ref=${branch}`, { headers: headers(token), cache: "no-store" }); if (!response.ok) throw new Error("No se encontró el archivo para eliminar."); return (await response.json() as Content).sha; }
+export const rawUrl = (path: string) => `https://raw.githubusercontent.com/${repo}/${branch}/${path.split("/").map(encodeURIComponent).join("/")}`;
