@@ -9,9 +9,11 @@ Galería pública y estática de las credenciales de Sebastián Hernández. Est�
 3. Haz un push a `main` y espera a que termine la acción **Deploy to GitHub Pages**.
 4. La dirección será `https://SebasHdez2006.github.io/sebas-hdez-profile/`.
 
-## Gestión privada
+## Gestión del archivo
 
-GitHub Pages no admite una zona de administración segura: todo su código se ejecuta en el navegador y no puede proteger claves ni recibir subidas. Por eso la edición se realiza únicamente desde tu cuenta de GitHub, que es el control de acceso real del repositorio.
+GitHub Pages no admite una zona de administración segura: todo su código se ejecuta en el navegador y no puede proteger claves ni recibir subidas. La edición del archivo se hace desde GitHub.
+
+Solo las cuentas a las que el propietario conceda permisos de escritura pueden modificar directamente este repositorio y publicar cambios en el sitio. Si el repositorio es público, cualquier persona puede verlo, clonarlo o crear un fork, pero no puede cambiar la copia original.
 
 Para añadir un certificado:
 
@@ -21,11 +23,13 @@ Para añadir un certificado:
 
 Para eliminarlo, borra el archivo y su ficha en el mismo commit.
 
-## Privacidad y descargas
+## Acceso público y descargas
 
-Un sitio público debe entregar los PDFs e imágenes al navegador para poder verlos. Por lo tanto, no es técnicamente posible impedir que un visitante descargue esos archivos, los guarde desde el navegador o copie el código publicado. Si un certificado contiene información que no quieres compartir, no lo incluyas o publica una versión redactada.
+Este sitio está pensado para ser público y enlazarse desde un currículum. Eso implica que los PDFs e imágenes que se muestran pueden descargarse, guardarse desde el navegador y compartirse. Tampoco es posible impedir que se copie el HTML, CSS y JavaScript ya publicados.
 
-Puedes mantener el repositorio privado y aun así publicar con GitHub Pages si tu plan/cuenta lo permite; eso limita el acceso al código fuente del repositorio, pero **no** a los archivos que se muestran en la página pública.
+Un repositorio público también permite que cualquiera descargue o clone su contenido. Cambiarlo a privado puede ocultar el código fuente, si tu plan/cuenta permite publicar GitHub Pages desde repositorios privados, pero **no** protege los certificados que sigan visibles en una web pública.
+
+No publiques información que no quieras compartir. Si un certificado contiene datos sensibles, utiliza una versión redactada antes de añadirla al archivo.
 
 ## Desarrollo local
 
