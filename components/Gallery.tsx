@@ -1,13 +1,12 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { Certificate } from "@/data/certificates";
 import { certificateUrl } from "@/data/certificates";
 
 export default function Gallery({ initialCertificates, disciplines }: { initialCertificates: Certificate[]; disciplines: string[] }) {
-  const [active, setActive] = useState("Todo"); const [allCertificates, setAllCertificates] = useState(initialCertificates);
+  const [active, setActive] = useState("Todo");
   const [selected, setSelected] = useState<Certificate | null>(null);
-  useEffect(() => { fetch("https://raw.githubusercontent.com/SebasHdez2006/sebas-hdez-profile/main/data/custom-certificates.json").then(result => result.ok ? result.json() : []).then((items: Certificate[]) => setAllCertificates([...initialCertificates, ...items])).catch(() => undefined); }, [initialCertificates]);
-  const visible = useMemo(() => active === "Todo" ? allCertificates : allCertificates.filter(item => item.discipline === active), [active, allCertificates]); const filters = ["Todo", ...new Set([...disciplines, ...allCertificates.map(item => item.discipline)])];
+  const visible = useMemo(() => active === "Todo" ? initialCertificates : initialCertificates.filter(item => item.discipline === active), [active, initialCertificates]); const filters = ["Todo", ...disciplines];
   return <section className="archive" id="archivo"><div className="archive-head"><div><p className="eyebrow">Archivo de credenciales</p><h2>Aprender, dejar<br />constancia, seguir.</h2></div><p className="archive-count">{visible.length.toString().padStart(2, "0")} piezas seleccionadas</p></div>
     <div className="filters">{filters.map(filter => <button key={filter} onClick={() => setActive(filter)} className={active === filter ? "active" : ""}>{filter}</button>)}</div>
     <div className="grid">{visible.map((item, index) => <button className="card" style={{ "--delay": `${index * 35}ms` } as React.CSSProperties} onClick={() => setSelected(item)} key={item.id}><span className="card-index">{String(index + 1).padStart(2, "0")}</span><div className={`art art-${index % 6}`}><span>{item.issuer.slice(0, 1)}</span><small>{item.discipline}</small></div><div className="card-meta"><p>{item.issuer}</p><h3>{item.title}</h3><span>Ver documento <i>↗</i></span></div></button>)}</div>

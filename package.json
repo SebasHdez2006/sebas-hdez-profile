@@ -1,7 +1,7 @@
 {
   "name": "sebas-hdez-profile",
   "private": true,
-  "scripts": { "dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint" },
-  "dependencies": { "next": "14.2.24", "next-auth": "4.24.11", "react": "18.3.1", "react-dom": "18.3.1" },
+  "scripts": { "dev": "next dev", "build": "next build", "start": "npx serve@14 out", "lint": "next lint" },
+  "dependencies": { "next": "14.2.24", "react": "18.3.1", "react-dom": "18.3.1" },
   "devDependencies": { "@types/node": "22.15.3", "@types/react": "18.3.23", "typescript": "5.8.3" }
 }

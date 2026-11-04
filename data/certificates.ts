@@ -14,4 +14,5 @@ export const certificates: Certificate[] = [
   { id: "sic-image", title: "Certificado SIC", issuer: "SIC", discipline: "Formación", file: "sic.jpg", type: "image", year: "" }
 ];
 
-export const certificateUrl = (file: string) => file.startsWith("http") ? file : encodeURI(`/certificates/${file}`);
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export const certificateUrl = (file: string) => file.startsWith("http") ? file : encodeURI(`${basePath}/certificates/${file}`);

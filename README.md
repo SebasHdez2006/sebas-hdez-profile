@@ -1,14 +1,35 @@
 # SH Archive
 
-Galería pública de certificados de Sebastián Hernández y panel privado de administración.
+Galería pública y estática de las credenciales de Sebastián Hernández. Está preparada para GitHub Pages: cada cambio que llegue a `main` publica el sitio automáticamente.
 
-## Publicar en Vercel
+## Activar GitHub Pages
 
-1. Importa este repositorio en Vercel como proyecto **Next.js**.
-2. Crea una [OAuth App de GitHub](https://github.com/settings/developers) con la URL de callback `https://TU-DOMINIO/api/auth/callback/github`.
-3. Copia las variables de `.env.example` a Vercel. Genera `NEXTAUTH_SECRET` con `openssl rand -base64 32` y sustituye `NEXTAUTH_URL` por tu dominio público.
-4. En GitHub, autoriza la OAuth App desde la cuenta `SebasHdez2006`. La aplicación solicita acceso `repo` únicamente para poder subir y borrar documentos desde `/admin`.
+1. Abre **Settings → Pages** en el repositorio.
+2. En **Build and deployment**, elige **GitHub Actions** como fuente.
+3. Haz un push a `main` y espera a que termine la acción **Deploy to GitHub Pages**.
+4. La dirección será `https://SebasHdez2006.github.io/sebas-hdez-profile/`.
 
-El acceso a `/admin` se comprueba tanto al iniciar sesión como en cada API del servidor: solo se admite el usuario indicado por `ADMIN_GITHUB_LOGIN`. Los documentos añadidos se versionan en el repositorio, dentro de `public/uploads/`, y el índice queda en `data/custom-certificates.json`.
+## Gestión privada
 
-Para desarrollo, copia `.env.example` como `.env.local`, completa las credenciales y ejecuta `npm install` y `npm run dev`.
+GitHub Pages no admite una zona de administración segura: todo su código se ejecuta en el navegador y no puede proteger claves ni recibir subidas. Por eso la edición se realiza únicamente desde tu cuenta de GitHub, que es el control de acceso real del repositorio.
+
+Para añadir un certificado:
+
+1. Sube el PDF o imagen a `public/certificates/` desde GitHub.
+2. Añade su ficha a `data/certificates.ts`, siguiendo el formato de las existentes.
+3. Haz commit a `main`; Pages publicará la nueva versión.
+
+Para eliminarlo, borra el archivo y su ficha en el mismo commit.
+
+## Privacidad y descargas
+
+Un sitio público debe entregar los PDFs e imágenes al navegador para poder verlos. Por lo tanto, no es técnicamente posible impedir que un visitante descargue esos archivos, los guarde desde el navegador o copie el código publicado. Si un certificado contiene información que no quieres compartir, no lo incluyas o publica una versión redactada.
+
+Puedes mantener el repositorio privado y aun así publicar con GitHub Pages si tu plan/cuenta lo permite; eso limita el acceso al código fuente del repositorio, pero **no** a los archivos que se muestran en la página pública.
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```

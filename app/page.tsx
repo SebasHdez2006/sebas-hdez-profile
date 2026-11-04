@@ -13,6 +13,6 @@ export default function Home() {
     </section>
     <section className="manifesto"><p className="eyebrow">Sobre el archivo</p><p className="statement">Las credenciales son <em>rastros.</em> Lo que importa es la curiosidad sostenida, el trabajo que dejan detrás y lo que permiten construir después.</p></section>
     <Gallery initialCertificates={certificates} disciplines={[...disciplines]} />
-    <footer><span>© {new Date().getFullYear()} Sebastián Hernández</span><a href="/admin">Área privada ↗</a><span>Hecho con intención</span></footer>
+    <footer><span>© {new Date().getFullYear()} Sebastián Hernández</span><a href="https://github.com/SebasHdez2006/sebas-hdez-profile" target="_blank" rel="noreferrer">Archivo fuente ↗</a><span>Hecho con intención</span></footer>
   </main>;
 }
