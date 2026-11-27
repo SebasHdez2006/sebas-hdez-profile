@@ -31,6 +31,10 @@ Un repositorio público también permite que cualquiera descargue o clone su con
 
 No publiques información que no quieras compartir. Si un certificado contiene datos sensibles, utiliza una versión redactada antes de añadirla al archivo.
 
+## Idiomas
+
+El sitio incluye un selector para español, inglés y portugués. Detecta el idioma del navegador y recuerda la elección del visitante. Para añadir otro idioma, agrega su código a `Locale`, inclúyelo en `localeOptions` y completa sus textos en `data/translations.ts`.
+
 ## Desarrollo local
 
 ```bash
